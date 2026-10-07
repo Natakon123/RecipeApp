@@ -1,0 +1,101 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Menus";
+    var recipes = Model.Recipes.ToList();
+}
+
+
+@* ---------- Search & Filter ---------- *@
+<form method="get" class="card card-body bg-light mb-3">
+    <div class="row g-2 align-items-end">
+        <div class="col-md-4">
+            <label asp-for="Criteria.Query" class="form-label"></label>
+            <input asp-for="Criteria.Query" class="form-control" placeholder="e.g. Pad Thai, egg, tofu" />
+        </div>
+        <div class="col-6 col-md-2">
+            <label asp-for="Criteria.MinMinutes" class="form-label"></label>
+            <input asp-for="Criteria.MinMinutes" type="number" min="0" class="form-control" />
+        </div>
+        <div class="col-6 col-md-2">
+            <label asp-for="Criteria.MaxMinutes" class="form-label"></label>
+            <input asp-for="Criteria.MaxMinutes" type="number" min="0" class="form-control" />
+        </div>
+        <div class="col-md-4 d-flex flex-wrap gap-3 align-items-center">
+            <div class="form-check">
+                <input asp-for="Criteria.Vegetarian" class="form-check-input" />
+                <label asp-for="Criteria.Vegetarian" class="form-check-label">Vegetarian</label>
+            </div>
+            <div class="form-check">
+                <input asp-for="Criteria.Vegan" class="form-check-input" />
+                <label asp-for="Criteria.Vegan" class="form-check-label">Vegan</label>
+            </div>
+            <div class="ms-auto">
+                <button type="submit" class="btn btn-primary">Search</button>
+                @if (Model.Criteria.HasFilters)
+                {
+                    <a asp-page="Index" class="btn btn-outline-secondary">Clear</a>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model.Criteria.HasFilters)
+{
+    <p class="text-muted">Found @recipes.Count recipe(s)</p>
+}
+
+<div class="table-responsive">
+    <table class="table table-striped recipe align-middle">
+        <thead>
+            <tr>
+                <th style="width:90px"></th>
+                <th>Recipe</th>
+                <th>Rating</th>
+                <th>TimeToCook</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var recipe in recipes)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(recipe.PhotoPath))
+                        {
+                            <img src="@recipe.PhotoPath" alt="@recipe.Name" class="recipe-thumb" />
+                        }
+                        else
+                        {
+                            <div class="recipe-thumb recipe-thumb-empty">No photo</div>
+                        }
+                    </td>
+                    <td>
+                        @recipe.Name
+                        @if (recipe.IsVegan) { <span class="badge bg-success ms-1">Vegan</span> }
+                        @if (recipe.IsVegetarian) { <span class="badge bg-info text-dark ms-1">Vegetarian</span> }
+                    </td>
+                    <td>
+                        @if (recipe.ReviewCount > 0)
+                        {
+                            <partial name="_Stars" model="recipe.AverageRating" />
+                            <small class="text-muted">@recipe.AverageRating.ToString("0.0") (@recipe.ReviewCount)</small>
+                        }
+                        else
+                        {
+                            <small class="text-muted">No reviews</small>
+                        }
+                    </td>
+                    <td>@recipe.TimeToCook</td>
+                    <td><a asp-page="Recipes/View" asp-route-id="@recipe.Id" class="btn btn-primary">View</a></td>
+                </tr>
+            }
+            @if (recipes.Count == 0)
+            {
+                <tr><td colspan="5" class="text-center text-muted py-4">No recipes found.</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
+<a asp-page="Recipes/Create" class="btn btn-success">Create new Recipe</a>

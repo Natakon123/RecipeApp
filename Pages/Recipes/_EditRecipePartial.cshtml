@@ -1,0 +1,76 @@
+@using RecipeApp.Models
+@model EditRecipeBase
+
+<div class="form-group">
+    <label asp-for="Name" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Method" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <textarea asp-for="Method" class="form-control"></textarea>
+        <span asp-validation-for="Method" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="TimeToCookHrs" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="TimeToCookHrs" class="form-control" />
+        <span asp-validation-for="TimeToCookHrs" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="TimeToCookMins" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="TimeToCookMins" class="form-control" />
+        <span asp-validation-for="TimeToCookMins" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Servings" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="Servings" type="number" min="1" max="100" class="form-control" />
+        <span asp-validation-for="Servings" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Photo" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        @if (Model is UpdateRecipeCommand upd && !string.IsNullOrEmpty(upd.CurrentPhotoPath))
+        {
+            <div class="mb-2">
+                <img src="@upd.CurrentPhotoPath" alt="Current photo" class="recipe-photo-preview" />
+                <div class="form-check">
+                    <input type="checkbox" id="RemovePhoto" name="@ViewData.TemplateInfo.GetFullHtmlFieldName("RemovePhoto")" value="true" class="form-check-input" />
+                    <label for="RemovePhoto" class="form-check-label">Remove current photo</label>
+                </div>
+            </div>
+        }
+        <input asp-for="Photo" type="file" accept="image/png,image/jpeg,image/gif,image/webp" class="form-control" />
+        <div class="form-text">JPG, PNG, GIF or WEBP, max 5 MB. Uploading a new photo replaces the old one.</div>
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+            <label class="control-label">
+                <input asp-for="IsVegetarian" /> Vegetarian?
+                <span asp-validation-for="IsVegetarian" class="text-danger"></span>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+            <label class="control-label">
+                <input asp-for="IsVegan" /> Vegan?
+                <span asp-validation-for="IsVegan" class="text-danger"></span>
+            </label>
+        </div>
+    </div>
+</div>
