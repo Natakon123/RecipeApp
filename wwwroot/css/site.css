@@ -337,3 +337,89 @@ form#account p {
     text-align: center !important;
     margin-top: 0.5rem !important;
 }
+/* 1. จัดพื้นที่ Container หลักให้อยู่ตรงกลางจอ */
+.main-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: calc(80vh - 100px) !important;
+}
+
+main[role="main"] {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+/* 2. บังคับย่อกรอบ Login / Register ให้กลายเป็นการ์ดใบเดียว */
+main[role="main"] > .row {
+    width: 100% !important;
+    max-width: 420px !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+    padding: 2.5rem 2rem !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid #eaedf0 !important;
+}
+
+/* 3. ขยายฟอร์มฝั่งซ้ายให้เต็มการ์ด */
+main[role="main"] > .row > div:first-child,
+main[role="main"] > .row > .col-md-4 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    padding: 0 !important;
+}
+
+/* 4. ซ่อนข้อความฝั่งขวา (Use another service to log in / register) */
+main[role="main"] > .row > div:nth-child(2),
+main[role="main"] > .row > .col-md-6,
+main[role="main"] > .row > .col-md-offset-2 {
+    display: none !important;
+}
+
+/* 5. จัดหัวข้อตัวอักษรให้อยู่ตรงกลาง */
+main[role="main"] h1, 
+main[role="main"] h2 {
+    text-align: center !important;
+    font-weight: 700 !important;
+    color: #2b2d42 !important;
+    margin-bottom: 1.25rem !important;
+}
+
+main[role="main"] hr {
+    display: none !important;
+}
+
+/* 6. ปุ่ม Login / Register สีส้ม-แดง */
+button#login-submit,
+button#registerSubmit,
+main[role="main"] button[type="submit"] {
+    background-color: #ff5a5f !important;
+    border-color: #ff5a5f !important;
+    color: #ffffff !important;
+    width: 100% !important;
+    padding: 0.75rem !important;
+    font-weight: 600 !important;
+    border-radius: 0.5rem !important;
+    margin-top: 0.75rem !important;
+    box-shadow: 0 4px 12px rgba(255, 90, 95, 0.25) !important;
+}
+
+button#login-submit:hover,
+button#registerSubmit:hover {
+    background-color: #e0484c !important;
+    border-color: #e0484c !important;
+}
+
+/* 7. ลิงก์ใต้ฟอร์ม */
+main[role="main"] a {
+    color: #ff5a5f !important;
+    text-decoration: none !important;
+}
+
+main[role="main"] a:hover {
+    text-decoration: underline !important;
+}
