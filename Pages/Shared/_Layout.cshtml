@@ -14,7 +14,6 @@
     <!-- Bootstrap & Site Styles -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/RecipeApp.styles.css" asp-append-version="true" />
 
     <style>
         body {
@@ -62,6 +61,14 @@
             flex: 1;
             padding-top: 1.5rem;
             padding-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-container > main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Footer Custom Styling */
@@ -82,6 +89,72 @@
 
         .footer-custom a:hover {
             text-decoration: underline;
+        }
+
+        /* ===================================================
+           FORCE CENTER IDENTITY LOGIN & REGISTER CARD
+           =================================================== */
+        body main .row:has(form#account),
+        body main .row:has(form#registerForm) {
+            max-width: 420px !important;
+            margin: 2rem auto !important;
+            background: #ffffff !important;
+            padding: 2.5rem 2rem !important;
+            border-radius: 1rem !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+            border: 1px solid #eaedf0 !important;
+            float: none !important;
+        }
+
+        body main .row:has(form#account) > div,
+        body main .row:has(form#registerForm) > div {
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: 0 0 100% !important;
+            padding: 0 !important;
+        }
+
+        body main .row:has(form#account) > div:nth-child(2),
+        body main .row:has(form#registerForm) > div:nth-child(2) {
+            display: none !important;
+        }
+
+        body main .row:has(form#account) h1,
+        body main .row:has(form#registerForm) h1,
+        body main .row:has(form#account) h2,
+        body main .row:has(form#registerForm) h2 {
+            text-align: center !important;
+            font-weight: 700 !important;
+            color: #2b2d42 !important;
+        }
+
+        body main .row:has(form#account) hr,
+        body main .row:has(form#registerForm) hr {
+            display: none !important;
+        }
+
+        body main button#login-submit,
+        body main button#registerSubmit {
+            background-color: #ff5a5f !important;
+            border-color: #ff5a5f !important;
+            color: #ffffff !important;
+            width: 100% !important;
+            padding: 0.75rem !important;
+            font-weight: 600 !important;
+            border-radius: 0.5rem !important;
+            margin-top: 0.75rem !important;
+            box-shadow: 0 4px 12px rgba(255, 90, 95, 0.25) !important;
+        }
+
+        body main button#login-submit:hover,
+        body main button#registerSubmit:hover {
+            background-color: #e0484c !important;
+            border-color: #e0484c !important;
+        }
+
+        body main .row:has(form#account) a,
+        body main .row:has(form#registerForm) a {
+            color: #ff5a5f !important;
         }
     </style>
 </head>
