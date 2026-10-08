@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RecipeApp;
@@ -25,8 +24,8 @@ builder.Services.AddRazorPages(options =>
     // บังคับให้ทุกหน้าในเว็บต้อง Login ก่อนถึงจะเข้าได้
     options.Conventions.AuthorizeFolder("/");
     
-    // ยกเว้นหน้า Login / Register / Logout ให้คนทั่วไปเข้าถึงได้
-    options.Conventions.AllowAnonymousToFolder("/Account");
+    // ยกเว้นหน้า Login / Register / Logout (อยู่ใน Area "Identity") ให้คนทั่วไปเข้าถึงได้
+    options.Conventions.AllowAnonymousToAreaFolder("Identity", "/Account");
 });
 
 builder.Services.AddScoped<PhotoService>();
@@ -58,7 +57,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// 3. เพิ่ม Authentication ก่อน Authorization (จำเป็นมากสำหรับระบบ Login)
+// 3. เพิ่ม Authentication ก่อน Authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
