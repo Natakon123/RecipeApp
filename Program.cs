@@ -20,7 +20,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
 })
 .AddEntityFrameworkStores<AppDbContext>();
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    // บังคับให้ทุกหน้าในเว็บต้อง Login ก่อนถึงจะเข้าได้
+    options.Conventions.AuthorizeFolder("/");
+    
+    // ยกเว้นหน้า Login / Register / Logout ให้คนทั่วไปเข้าถึงได้
+    options.Conventions.AllowAnonymousToFolder("/Account");
+});
 
 builder.Services.AddScoped<PhotoService>();
 builder.Services.AddScoped<RecipeService>();
