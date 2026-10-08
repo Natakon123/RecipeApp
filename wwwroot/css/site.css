@@ -204,3 +204,136 @@ form#account p {
     margin-top: 0.5rem !important;
     margin-bottom: 0.25rem !important;
 }
+/* จัดการ Container หลักให้ดันเนื้อหา Identity มาตรงกลาง */
+.main-container:has(form#account),
+.main-container:has(form#registerForm),
+.main-container:has(#account-recovery) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: calc(100vh - 180px) !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+}
+
+.main-container:has(form#account) main,
+.main-container:has(form#registerForm) main,
+.main-container:has(#account-recovery) main {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+/* ครอบกล่อง Login / Register ให้เป็น Card ตรงกลาง */
+main .row:has(form#account),
+main .row:has(form#registerForm) {
+    width: 100% !important;
+    max-width: 440px !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+    padding: 2.5rem !important;
+    border-radius: 1.25rem !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid #edf2f7 !important;
+}
+
+/* ขยายคอลัมน์ภายในฟอร์มให้เต็ม Card */
+main .row:has(form#account) > div,
+main .row:has(form#registerForm) > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    padding: 0 !important;
+}
+
+/* ซ่อนคอลัมน์ขวา (Use another service to log in/register) */
+main .row:has(form#account) > div:nth-child(2),
+main .row:has(form#registerForm) > div:nth-child(2),
+div#external-account,
+section#externalLoginForm {
+    display: none !important;
+}
+
+/* จัดสไตล์ Typography หัวข้อ */
+main .row:has(form#account) h1,
+main .row:has(form#registerForm) h1,
+main .row:has(form#account) h2,
+main .row:has(form#registerForm) h2 {
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    color: #2b2d42 !important;
+    text-align: center !important;
+    margin-bottom: 0.5rem !important;
+}
+
+main .row:has(form#account) h2 + h3,
+main .row:has(form#registerForm) h2 + h3,
+main .row:has(form#account) h1 + h2,
+main .row:has(form#registerForm) h1 + h2 {
+    font-size: 0.9rem !important;
+    color: #718096 !important;
+    text-align: center !important;
+    font-weight: 400 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+main hr {
+    display: none !important;
+}
+
+/* ปรับแต่งช่อง Form Input */
+.form-floating {
+    margin-bottom: 1rem !important;
+}
+
+.form-floating > .form-control {
+    border-radius: 0.75rem !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.form-floating > .form-control:focus {
+    border-color: #ff5a5f !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 90, 95, 0.2) !important;
+}
+
+/* ปรับปุ่ม Submit เป็นโทนส้ม-แดง */
+button#login-submit,
+button#registerSubmit,
+form#account button[type="submit"],
+form#registerForm button[type="submit"] {
+    background-color: #ff5a5f !important;
+    border: none !important;
+    color: #ffffff !important;
+    padding: 0.8rem !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    border-radius: 0.75rem !important;
+    width: 100% !important;
+    margin-top: 0.75rem !important;
+    box-shadow: 0 4px 12px rgba(255, 90, 95, 0.25) !important;
+    transition: all 0.2s ease !important;
+}
+
+button#login-submit:hover,
+button#registerSubmit:hover {
+    background-color: #e0484c !important;
+    transform: translateY(-1px);
+}
+
+/* ลิงก์ใต้ฟอร์ม */
+form#account a,
+form#registerForm a {
+    color: #ff5a5f !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+form#account a:hover,
+form#registerForm a:hover {
+    text-decoration: underline !important;
+}
+
+form#account p {
+    text-align: center !important;
+    margin-top: 0.5rem !important;
+}
