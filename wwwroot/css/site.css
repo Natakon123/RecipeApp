@@ -9,7 +9,7 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #ff5a5f;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
@@ -19,7 +19,6 @@ html {
 
 body {
   margin-bottom: 60px;
-  background-color: #f8f9fa;
 }
 
 /* ---- Recipe photos ---- */
@@ -64,7 +63,7 @@ body {
   color: #d0d0d0;
 }
 
-/* Clickable 1-5 star input */
+/* Clickable 1-5 star input (radios in reverse order so CSS sibling selector can fill stars) */
 .star-input {
   display: inline-flex;
   flex-direction: row-reverse;
@@ -93,105 +92,4 @@ body {
 
 .star-input input:focus-visible + label {
   outline: 2px solid #258cfb;
-}
-
-/* ===================================================
-   MODERN IDENTITY UI STYLING (LOGIN & REGISTER)
-   =================================================== */
-
-/* ซ่อนแถบขวา "Use another service" ที่ทำให้หน้าเละ */
-main .col-md-6,
-main .col-md-offset-2,
-div#external-account,
-section#externalLoginForm {
-    display: none !important;
-}
-
-/* ดึงคอลัมน์ฟอร์มมาไว้ตรงกลางจอ และปรับเป็น Card */
-main .row {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    min-height: 65vh;
-}
-
-main .col-md-4 {
-    width: 100% !important;
-    max-width: 420px !important;
-    flex: 0 0 100% !important;
-    background: #ffffff;
-    padding: 2.5rem !important;
-    border-radius: 1rem !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
-    border: 1px solid #eaeaea !important;
-}
-
-/* หัวข้อหน้า Login / Register */
-main h2 {
-    color: #212529;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.75rem;
-}
-
-main h2 + h4,
-main hr {
-    display: none !important;
-}
-
-/* ช่องกรอกข้อมูล (Floating Labels) */
-.form-floating {
-    margin-bottom: 1rem !important;
-}
-
-.form-floating > .form-control {
-    border-radius: 0.5rem;
-    border: 1px solid #ced4da;
-}
-
-.form-floating > .form-control:focus {
-    border-color: #ff5a5f;
-}
-
-/* ปุ่ม Sign In / Sign Up สีส้มแอปอาหาร */
-button#login-submit,
-button#registerSubmit,
-form#account .btn-primary,
-form#registerForm .btn-primary {
-    background-color: #ff5a5f !important;
-    border: none !important;
-    color: #ffffff !important;
-    padding: 0.8rem !important;
-    font-weight: 600 !important;
-    font-size: 1rem !important;
-    border-radius: 0.5rem !important;
-    width: 100% !important;
-    margin-top: 0.5rem !important;
-    box-shadow: 0 4px 10px rgba(255, 90, 95, 0.2) !important;
-    transition: background-color 0.2s ease !important;
-}
-
-button#login-submit:hover,
-button#registerSubmit:hover {
-    background-color: #e0484c !important;
-}
-
-/* ลิงก์ด้านล่างฟอร์ม */
-form#account a,
-form#registerForm a {
-    color: #ff5a5f;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-form#account a:hover,
-form#registerForm a:hover {
-    text-decoration: underline;
-}
-
-form#account p {
-    text-align: center;
-    margin-top: 0.5rem;
-    margin-bottom: 0.25rem;
 }
