@@ -25,7 +25,6 @@
             min-height: 100vh;
         }
 
-        /* Navbar Custom Styling */
         .navbar-custom {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -56,24 +55,12 @@
             background-color: rgba(255, 90, 95, 0.08);
         }
 
-        /* Main Content wrapper */
         .main-container {
             flex: 1;
             padding-top: 1.5rem;
             padding-bottom: 3rem;
-            display: flex;
-            flex-direction: column;
         }
 
-        .main-container > main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-
-        /* Footer Custom Styling */
         .footer-custom {
             background-color: #ffffff;
             border-top: 1px solid #edf2f7;
@@ -93,55 +80,33 @@
             text-decoration: underline;
         }
 
-        /* ===================================================
-           FORCE IDENTITY FORM TO CENTER CARD (PURE CSS)
-           =================================================== */
-        
-        /* 1. บังคับเปลี่ยนโครงสร้างแถว Identity ทั้งหมดให้เปลี่ยนเป็นกล่องกลาง */
-        main[role="main"] > .row {
-            width: 100% !important;
+        /* ----------------------------------------------------
+           CSS สำหรับบังคับให้ฟอร์ม Identity กลายเป็นการ์ดสีส้มตรงกลาง
+           ---------------------------------------------------- */
+        .identity-card-box {
             max-width: 420px !important;
-            margin: 1.5rem auto !important;
+            margin: 2rem auto !important;
             background: #ffffff !important;
             padding: 2.5rem 2rem !important;
             border-radius: 1rem !important;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
             border: 1px solid #eaedf0 !important;
+            float: none !important;
         }
 
-        /* 2. ดึงฟอร์มซ้ายให้เต็มกรอบการ์ด 100% */
-        main[role="main"] > .row > div:first-child,
-        main[role="main"] > .row > .col-md-4 {
-            width: 100% !important;
-            max-width: 100% !important;
-            flex: 0 0 100% !important;
-            padding: 0 !important;
-        }
-
-        /* 3. ซ่อนคอลัมน์ขวา (Use another service to log in) */
-        main[role="main"] > .row > div:nth-child(2),
-        main[role="main"] > .row > .col-md-6,
-        main[role="main"] > .row > .col-md-offset-2 {
-            display: none !important;
-        }
-
-        /* 4. จัดหัวข้อตัวอักษรให้อยู่ตรงกลาง */
-        main[role="main"] h1, 
-        main[role="main"] h2 {
+        .identity-card-box h1, 
+        .identity-card-box h2 {
             text-align: center !important;
             font-weight: 700 !important;
             color: #2b2d42 !important;
-            margin-bottom: 1.25rem !important;
+            font-size: 1.75rem !important;
         }
 
-        main[role="main"] hr {
+        .identity-card-box hr {
             display: none !important;
         }
 
-        /* 5. เปลี่ยนปุ่ม Log in / Register ให้เป็นโทนสีส้ม-แดง */
-        button#login-submit,
-        button#registerSubmit,
-        main[role="main"] button[type="submit"] {
+        .identity-card-box button[type="submit"] {
             background-color: #ff5a5f !important;
             border-color: #ff5a5f !important;
             color: #ffffff !important;
@@ -153,14 +118,12 @@
             box-shadow: 0 4px 12px rgba(255, 90, 95, 0.25) !important;
         }
 
-        button#login-submit:hover,
-        button#registerSubmit:hover {
+        .identity-card-box button[type="submit"]:hover {
             background-color: #e0484c !important;
             border-color: #e0484c !important;
         }
 
-        /* 6. เปลี่ยนสีลิงก์ด้านล่าง */
-        main[role="main"] a {
+        .identity-card-box a {
             color: #ff5a5f !important;
         }
     </style>
@@ -194,7 +157,6 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- แทรก Partial View สำหรับแสดงปุ่ม Login / Register / Logout -->
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -221,6 +183,41 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- สคริปต์สแกนเปลี่ยน Layout ของ Login/Register เป็นการ์ดให้อัตโนมัติ -->
+    <script>
+        (function () {
+            function reformatIdentityPage() {
+                var forms = document.querySelectorAll('main form');
+                forms.forEach(function (form) {
+                    var row = form.closest('.row');
+                    if (row) {
+                        row.classList.add('identity-card-box');
+                        
+                        // ขยายฝั่งฟอร์มให้อยู่เต็มการ์ด
+                        var parentDiv = form.parentElement;
+                        if (parentDiv) {
+                            parentDiv.className = 'col-12';
+                        }
+
+                        // ซ่อนฝั่งขวา (Use another service to log in)
+                        var siblings = Array.from(row.children);
+                        siblings.forEach(function (child) {
+                            if (child !== parentDiv) {
+                                child.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', reformatIdentityPage);
+            } else {
+                reformatIdentityPage();
+            }
+        })();
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
