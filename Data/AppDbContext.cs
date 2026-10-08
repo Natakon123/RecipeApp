@@ -1,8 +1,11 @@
+// Natakon Wongnikom 671410014
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RecipeApp.Models;
 
 namespace RecipeApp.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
@@ -15,6 +18,9 @@ namespace RecipeApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // จำเป็นต้องมีเพื่อโหลดการตั้งค่าตารางของ Identity (AspNetUsers, AspNetRoles ฯลฯ)
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Recipe>()
                 .HasMany(r => r.Ingredients)
                 .WithOne()

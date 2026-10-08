@@ -97,7 +97,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav ms-auto gap-1">
+                    <ul class="navbar-nav me-auto gap-1">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Index">
                                 <i class="fa-solid fa-house me-1"></i> Home
@@ -114,6 +114,8 @@
                             </a>
                         </li>
                     </ul>
+                    <!-- แทรก Partial View สำหรับแสดงปุ่ม Login / Register / Logout -->
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
@@ -128,7 +130,7 @@
     <footer class="footer-custom">
         <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
             <div>
-                &copy; 2026 <strong>RecipeApp</strong>. All rights reserved.
+                &copy; 2026 <strong>RecipeApp</strong> (Natakon Wongnikom 671410014). All rights reserved.
             </div>
             <div>
                 <a asp-area="" asp-page="/Privacy">Privacy Policy</a>
