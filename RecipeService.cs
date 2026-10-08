@@ -20,48 +20,60 @@ namespace RecipeApp
         /// <summary>
         /// Active recipes, optionally filtered by name / ingredient, cooking time and vegetarian / vegan flags
         /// </summary>
-        public async Task<List<RecipeSummaryViewModel>> GetRecipes(RecipeSearchCriteria? criteria = null)
+public async Task<List<RecipeSummaryViewModel>> GetRecipes(RecipeSearchCriteria? criteria = null)
+{
+    // *** จุดสำคัญ: ต้องใส่ .Include(r => r.Reviews) ***
+    var query = _context.Recipes
+        .Include(r => r.Reviews)
+        .Include(r => r.Ingredients)
+        .Where(r => !r.IsDeleted);
+
+    if (criteria != null)
+    {
+        if (!string.IsNullOrWhiteSpace(criteria.Query))
         {
-            var query = _context.Recipes.Where(r => !r.IsDeleted);
-
-            if (criteria != null)
-            {
-                if (!string.IsNullOrWhiteSpace(criteria.Query))
-                {
-                    var term = criteria.Query.Trim();
-                    query = query.Where(r => r.Name.Contains(term)
-                                          || r.Ingredients.Any(i => i.Name.Contains(term)));
-                }
-                if (criteria.MinMinutes.HasValue)
-                {
-                    var min = TimeSpan.FromMinutes(criteria.MinMinutes.Value);
-                    query = query.Where(r => r.TimeToCook >= min);
-                }
-                if (criteria.MaxMinutes.HasValue)
-                {
-                    var max = TimeSpan.FromMinutes(criteria.MaxMinutes.Value);
-                    query = query.Where(r => r.TimeToCook <= max);
-                }
-                if (criteria.Vegetarian) query = query.Where(r => r.IsVegetarian);
-                if (criteria.Vegan) query = query.Where(r => r.IsVegan);
-            }
-
-            return await query
-                .OrderBy(r => r.Name)
-                .Select(x => new RecipeSummaryViewModel
-                {
-                    Id = x.RecipeId,
-                    Name = x.Name,
-                    Time = x.TimeToCook,
-                    PhotoPath = x.PhotoPath,
-                    IsVegetarian = x.IsVegetarian,
-                    IsVegan = x.IsVegan,
-                    ReviewCount = x.Reviews.Count(),
-                    AverageRating = x.Reviews.Average(rv => (double?)rv.Rating) ?? 0,
-                })
-                .ToListAsync();
+            var term = criteria.Query.Trim();
+            query = query.Where(r => r.Name.Contains(term)
+                                  || r.Ingredients.Any(i => i.Name.Contains(term)));
         }
 
+        if (criteria.Vegetarian) query = query.Where(r => r.IsVegetarian);
+        if (criteria.Vegan) query = query.Where(r => r.IsVegan);
+    }
+
+    var recipes = await query.ToListAsync();
+
+    if (criteria != null)
+    {
+        if (criteria.MinMinutes.HasValue && criteria.MinMinutes.Value >= 0)
+        {
+            recipes = recipes.Where(r => r.TimeToCook.TotalMinutes >= criteria.MinMinutes.Value).ToList();
+        }
+
+        if (criteria.MaxMinutes.HasValue && criteria.MaxMinutes.Value >= 0)
+        {
+            recipes = recipes.Where(r => r.TimeToCook.TotalMinutes <= criteria.MaxMinutes.Value).ToList();
+        }
+    }
+
+    return recipes
+        .OrderBy(r => r.Name)
+        .Select(x => new RecipeSummaryViewModel
+        {
+            Id = x.RecipeId,
+            Name = x.Name,
+            Time = x.TimeToCook,
+            PhotoPath = x.PhotoPath,
+            IsVegetarian = x.IsVegetarian,
+            IsVegan = x.IsVegan,
+            // คำนวณจำนวนรีวิวและคะแนนเฉลี่ย
+            ReviewCount = x.Reviews != null ? x.Reviews.Count : 0,
+            AverageRating = (x.Reviews != null && x.Reviews.Any()) 
+                            ? x.Reviews.Average(rv => (double)rv.Rating) 
+                            : 0,
+        })
+        .ToList();
+}
         public async Task<RecipeDetailViewModel?> GetRecipeDetail(int id)
         {
             return await _context.Recipes

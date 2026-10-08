@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QWkMmCSHZ/i3TYdpanK9eleYQM5nF8MelnHOuP9udUg=",
+  "Hash": "8SU3POJgfDnwQ4lsfY2f00ekTgH/Rd/PKkvpxJkyyV4=",
   "Source": "RecipeApp",
   "BasePath": "_content/RecipeApp",
   "Mode": "Default",
@@ -1212,6 +1212,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\3e3febebc505445d882f971829a83d1a.png"
+    },
+    {
+      "Identity": "C:\\Users\\66969\\Downloads\\RecipeApp\\wwwroot\\uploads\\fa780d3f70ff411c9407abd3ab7966b1.webp",
+      "SourceId": "RecipeApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\66969\\Downloads\\RecipeApp\\wwwroot\\",
+      "BasePath": "_content/RecipeApp",
+      "RelativePath": "uploads/fa780d3f70ff411c9407abd3ab7966b1.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\fa780d3f70ff411c9407abd3ab7966b1.webp"
     },
     {
       "Identity": "C:\\Users\\66969\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\8.0.0\\staticwebassets\\V5\\css\\site.css",

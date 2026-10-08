@@ -253,6 +253,10 @@
       "PackagePath": "staticwebassets\\uploads\\3e3febebc505445d882f971829a83d1a.png"
     },
     {
+      "Id": "C:\\Users\\66969\\Downloads\\RecipeApp\\wwwroot\\uploads\\fa780d3f70ff411c9407abd3ab7966b1.webp",
+      "PackagePath": "staticwebassets\\uploads\\fa780d3f70ff411c9407abd3ab7966b1.webp"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.RecipeApp.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
