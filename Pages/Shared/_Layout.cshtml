@@ -69,6 +69,8 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
         /* Footer Custom Styling */
@@ -92,49 +94,54 @@
         }
 
         /* ===================================================
-           FORCE CENTER IDENTITY LOGIN & REGISTER CARD
+           FORCE IDENTITY FORM TO CENTER CARD (PURE CSS)
            =================================================== */
-        body main .row:has(form#account),
-        body main .row:has(form#registerForm) {
+        
+        /* 1. บังคับเปลี่ยนโครงสร้างแถว Identity ทั้งหมดให้เปลี่ยนเป็นกล่องกลาง */
+        main[role="main"] > .row {
+            width: 100% !important;
             max-width: 420px !important;
-            margin: 2rem auto !important;
+            margin: 1.5rem auto !important;
             background: #ffffff !important;
             padding: 2.5rem 2rem !important;
             border-radius: 1rem !important;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
             border: 1px solid #eaedf0 !important;
-            float: none !important;
         }
 
-        body main .row:has(form#account) > div,
-        body main .row:has(form#registerForm) > div {
+        /* 2. ดึงฟอร์มซ้ายให้เต็มกรอบการ์ด 100% */
+        main[role="main"] > .row > div:first-child,
+        main[role="main"] > .row > .col-md-4 {
             width: 100% !important;
             max-width: 100% !important;
             flex: 0 0 100% !important;
             padding: 0 !important;
         }
 
-        body main .row:has(form#account) > div:nth-child(2),
-        body main .row:has(form#registerForm) > div:nth-child(2) {
+        /* 3. ซ่อนคอลัมน์ขวา (Use another service to log in) */
+        main[role="main"] > .row > div:nth-child(2),
+        main[role="main"] > .row > .col-md-6,
+        main[role="main"] > .row > .col-md-offset-2 {
             display: none !important;
         }
 
-        body main .row:has(form#account) h1,
-        body main .row:has(form#registerForm) h1,
-        body main .row:has(form#account) h2,
-        body main .row:has(form#registerForm) h2 {
+        /* 4. จัดหัวข้อตัวอักษรให้อยู่ตรงกลาง */
+        main[role="main"] h1, 
+        main[role="main"] h2 {
             text-align: center !important;
             font-weight: 700 !important;
             color: #2b2d42 !important;
+            margin-bottom: 1.25rem !important;
         }
 
-        body main .row:has(form#account) hr,
-        body main .row:has(form#registerForm) hr {
+        main[role="main"] hr {
             display: none !important;
         }
 
-        body main button#login-submit,
-        body main button#registerSubmit {
+        /* 5. เปลี่ยนปุ่ม Log in / Register ให้เป็นโทนสีส้ม-แดง */
+        button#login-submit,
+        button#registerSubmit,
+        main[role="main"] button[type="submit"] {
             background-color: #ff5a5f !important;
             border-color: #ff5a5f !important;
             color: #ffffff !important;
@@ -146,14 +153,14 @@
             box-shadow: 0 4px 12px rgba(255, 90, 95, 0.25) !important;
         }
 
-        body main button#login-submit:hover,
-        body main button#registerSubmit:hover {
+        button#login-submit:hover,
+        button#registerSubmit:hover {
             background-color: #e0484c !important;
             border-color: #e0484c !important;
         }
 
-        body main .row:has(form#account) a,
-        body main .row:has(form#registerForm) a {
+        /* 6. เปลี่ยนสีลิงก์ด้านล่าง */
+        main[role="main"] a {
             color: #ff5a5f !important;
         }
     </style>
