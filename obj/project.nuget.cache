@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CKCvhGw/99A=",
+  "dgSpecHash": "zlenmV1WkK8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\66969\\Downloads\\Lab12_Complete\\RecipeApp\\RecipeApp.csproj",
+  "projectFilePath": "C:\\Users\\66969\\Downloads\\RecipeApp\\RecipeApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\66969\\.nuget\\packages\\azure.core\\1.41.0\\azure.core.1.41.0.nupkg.sha512",
     "C:\\Users\\66969\\.nuget\\packages\\azure.identity\\1.12.1\\azure.identity.1.12.1.nupkg.sha512",

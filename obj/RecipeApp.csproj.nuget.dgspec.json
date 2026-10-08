@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\66969\\Downloads\\Lab12_Complete\\RecipeApp\\RecipeApp.csproj": {}
+    "C:\\Users\\66969\\Downloads\\RecipeApp\\RecipeApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\66969\\Downloads\\Lab12_Complete\\RecipeApp\\RecipeApp.csproj": {
+    "C:\\Users\\66969\\Downloads\\RecipeApp\\RecipeApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\66969\\Downloads\\Lab12_Complete\\RecipeApp\\RecipeApp.csproj",
+        "projectUniqueName": "C:\\Users\\66969\\Downloads\\RecipeApp\\RecipeApp.csproj",
         "projectName": "RecipeApp",
-        "projectPath": "C:\\Users\\66969\\Downloads\\Lab12_Complete\\RecipeApp\\RecipeApp.csproj",
+        "projectPath": "C:\\Users\\66969\\Downloads\\RecipeApp\\RecipeApp.csproj",
         "packagesPath": "C:\\Users\\66969\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\66969\\Downloads\\Lab12_Complete\\RecipeApp\\obj\\",
+        "outputPath": "C:\\Users\\66969\\Downloads\\RecipeApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\66969\\AppData\\Roaming\\NuGet\\NuGet.Config",
