@@ -1,8 +1,7 @@
 ITMI1302 Web Application Development with C# .Net Core Framework
 Laboratory #12 - EF Core + Local DB + Razor Pages (RecipeApp)
 
-Student: Natakon Wongnikom
-Student ID: 671410014
+
 
 Fixed bug: _EditRecipePartial is included via <partial name="_EditRecipePartial" for="Input" />
 (NOT model="Model.Input") in Create.cshtml and Edit.cshtml, so posted field names get the
