@@ -4,22 +4,63 @@
     ViewData["Title"] = "Create Recipe";
 }
 
-<h2>@ViewData["Title"]</h2>
-<hr />
-<form method="post" enctype="multipart/form-data" class="form-horizontal" id="recipeForm">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-9">
+        @* ---------- Header Bar ---------- *@
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+                <h2 class="fw-bold text-dark mb-1">
+                    <i class="fa-solid fa-utensils text-danger me-2"></i>@ViewData["Title"]
+                </h2>
+                <p class="text-muted small mb-0">Fill in the details below to add a new recipe to your collection</p>
+            </div>
+            <a asp-page="/Index" class="btn btn-outline-secondary rounded-3 px-3">
+                <i class="fa-solid fa-arrow-left me-1"></i> Back to Menus
+            </a>
+        </div>
 
-    <partial name="_EditRecipePartial" for="Input" />
-    <partial name="_IngredientsEditor" for="Input" />
+        @* ---------- Form Card ---------- *@
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5">
+            <div class="card-body p-4 p-md-5 bg-white">
+                <form method="post" enctype="multipart/form-data" id="recipeForm">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4" role="alert"></div>
 
-    <div class="form-group mt-3">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="button" class="btn btn-success" id="addIngredient">Add ingredient</button>
-            <button type="submit" class="btn btn-primary">Create</button>
-            <a asp-page="/Index" class="btn btn-outline-secondary">Cancel</a>
+                    @* Details & Photo Section *@
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">
+                            <i class="fa-solid fa-circle-info text-primary me-2"></i>General Details
+                        </h5>
+                        <partial name="_EditRecipePartial" for="Input" />
+                    </div>
+
+                    @* Ingredients Section *@
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                            <h5 class="fw-bold text-dark mb-0">
+                                <i class="fa-solid fa-carrot text-success me-2"></i>Ingredients & Nutrition
+                            </h5>
+                            <button type="button" class="btn btn-sm btn-outline-success fw-semibold rounded-pill px-3" id="addIngredient">
+                                <i class="fa-solid fa-plus me-1"></i> Add Ingredient
+                            </button>
+                        </div>
+                        
+                        <div class="bg-light p-3 rounded-3 mb-3">
+                            <partial name="_IngredientsEditor" for="Input" />
+                        </div>
+                    </div>
+
+                    @* Action Buttons *@
+                    <div class="d-flex align-items-center justify-content-end gap-2 pt-3 border-top">
+                        <a asp-page="/Index" class="btn btn-light border text-secondary fw-semibold px-4 py-2 rounded-3">Cancel</a>
+                        <button type="submit" class="btn btn-primary fw-semibold px-4 py-2 rounded-3 shadow-sm" style="background-color: #ff5a5f; border: none;">
+                            <i class="fa-solid fa-check me-1"></i> Save Recipe
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

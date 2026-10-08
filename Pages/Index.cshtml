@@ -5,97 +5,137 @@
     var recipes = Model.Recipes.ToList();
 }
 
-
-@* ---------- Search & Filter ---------- *@
-<form method="get" class="card card-body bg-light mb-3">
-    <div class="row g-2 align-items-end">
-        <div class="col-md-4">
-            <label asp-for="Criteria.Query" class="form-label"></label>
-            <input asp-for="Criteria.Query" class="form-control" placeholder="e.g. Pad Thai, egg, tofu" />
-        </div>
-        <div class="col-6 col-md-2">
-            <label asp-for="Criteria.MinMinutes" class="form-label"></label>
-            <input asp-for="Criteria.MinMinutes" type="number" min="0" class="form-control" />
-        </div>
-        <div class="col-6 col-md-2">
-            <label asp-for="Criteria.MaxMinutes" class="form-label"></label>
-            <input asp-for="Criteria.MaxMinutes" type="number" min="0" class="form-control" />
-        </div>
-        <div class="col-md-4 d-flex flex-wrap gap-3 align-items-center">
-            <div class="form-check">
-                <input asp-for="Criteria.Vegetarian" class="form-check-input" />
-                <label asp-for="Criteria.Vegetarian" class="form-check-label">Vegetarian</label>
-            </div>
-            <div class="form-check">
-                <input asp-for="Criteria.Vegan" class="form-check-input" />
-                <label asp-for="Criteria.Vegan" class="form-check-label">Vegan</label>
-            </div>
-            <div class="ms-auto">
-                <button type="submit" class="btn btn-primary">Search</button>
-                @if (Model.Criteria.HasFilters)
-                {
-                    <a asp-page="Index" class="btn btn-outline-secondary">Clear</a>
-                }
-            </div>
-        </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold text-dark mb-1">Recipes</h2>
+        <p class="text-muted small mb-0">Explore and search for your favorite recipes</p>
     </div>
-</form>
+    <a asp-page="Recipes/Create" class="btn btn-primary fw-semibold px-4 py-2 rounded-3 shadow-sm" style="background-color: #ff5a5f; border: none;">
+        <i class="fa-solid fa-plus me-1"></i> Create New Recipe
+    </a>
+</div>
+
+@* ---------- Search & Filter Card ---------- *@
+<div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+    <div class="card-body p-4 bg-white">
+        <form method="get">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label asp-for="Criteria.Query" class="form-label fw-semibold text-secondary small">Recipe Name or Ingredient</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                        <input asp-for="Criteria.Query" class="form-control border-start-0 bg-light" placeholder="e.g. Pad Thai, egg, tofu" />
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <label asp-for="Criteria.MinMinutes" class="form-label fw-semibold text-secondary small">Min Time (mins)</label>
+                    <input asp-for="Criteria.MinMinutes" type="number" min="0" class="form-control bg-light" placeholder="0" />
+                </div>
+                <div class="col-6 col-md-2">
+                    <label asp-for="Criteria.MaxMinutes" class="form-label fw-semibold text-secondary small">Max Time (mins)</label>
+                    <input asp-for="Criteria.MaxMinutes" type="number" min="0" class="form-control bg-light" placeholder="60" />
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex flex-wrap gap-3 align-items-center mb-2">
+                        <div class="form-check">
+                            <input asp-for="Criteria.Vegetarian" class="form-check-input" id="vegCheck" />
+                            <label class="form-check-label small fw-medium" for="vegCheck">Vegetarian</label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="Criteria.Vegan" class="form-check-input" id="veganCheck" />
+                            <label class="form-check-label small fw-medium" for="veganCheck">Vegan</label>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-dark fw-semibold w-100 rounded-3">Search</button>
+                        @if (Model.Criteria.HasFilters)
+                        {
+                            <a asp-page="Index" class="btn btn-outline-secondary fw-semibold rounded-3">Clear</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 @if (Model.Criteria.HasFilters)
 {
-    <p class="text-muted">Found @recipes.Count recipe(s)</p>
+    <p class="text-muted fw-medium mb-3"><i class="fa-solid fa-list-check me-1"></i> Found @recipes.Count recipe(s)</p>
 }
 
-<div class="table-responsive">
-    <table class="table table-striped recipe align-middle">
-        <thead>
-            <tr>
-                <th style="width:90px"></th>
-                <th>Recipe</th>
-                <th>Rating</th>
-                <th>TimeToCook</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var recipe in recipes)
-            {
+@* ---------- Recipe Table List ---------- *@
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light border-bottom">
                 <tr>
-                    <td>
-                        @if (!string.IsNullOrEmpty(recipe.PhotoPath))
-                        {
-                            <img src="@recipe.PhotoPath" alt="@recipe.Name" class="recipe-thumb" />
-                        }
-                        else
-                        {
-                            <div class="recipe-thumb recipe-thumb-empty">No photo</div>
-                        }
-                    </td>
-                    <td>
-                        @recipe.Name
-                        @if (recipe.IsVegan) { <span class="badge bg-success ms-1">Vegan</span> }
-                        @if (recipe.IsVegetarian) { <span class="badge bg-info text-dark ms-1">Vegetarian</span> }
-                    </td>
-                    <td>
-                        @if (recipe.ReviewCount > 0)
-                        {
-                            <partial name="_Stars" model="recipe.AverageRating" />
-                            <small class="text-muted">@recipe.AverageRating.ToString("0.0") (@recipe.ReviewCount)</small>
-                        }
-                        else
-                        {
-                            <small class="text-muted">No reviews</small>
-                        }
-                    </td>
-                    <td>@recipe.TimeToCook</td>
-                    <td><a asp-page="Recipes/View" asp-route-id="@recipe.Id" class="btn btn-primary">View</a></td>
+                    <th style="width: 100px;" class="ps-4">Photo</th>
+                    <th>Recipe</th>
+                    <th>Rating</th>
+                    <th>Time to Cook</th>
+                    <th class="text-end pe-4">Action</th>
                 </tr>
-            }
-            @if (recipes.Count == 0)
-            {
-                <tr><td colspan="5" class="text-center text-muted py-4">No recipes found.</td></tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var recipe in recipes)
+                {
+                    <tr>
+                        <td class="ps-4">
+                            @if (!string.IsNullOrEmpty(recipe.PhotoPath))
+                            {
+                                <img src="@recipe.PhotoPath" alt="@recipe.Name" class="rounded-3 shadow-sm object-fit-cover" style="width: 70px; height: 55px;" />
+                            }
+                            @if (string.IsNullOrEmpty(recipe.PhotoPath))
+                            {
+                                <div class="rounded-3 bg-light text-muted d-flex align-items-center justify-content-center border" style="width: 70px; height: 55px; font-size: 0.75rem;">
+                                    <i class="fa-regular fa-image me-1"></i> No photo
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <div class="fw-bold text-dark fs-6 mb-1">@recipe.Name</div>
+                            <div>
+                                @if (recipe.IsVegan) { <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Vegan</span> }
+                                @if (recipe.IsVegetarian) { <span class="badge bg-info-subtle text-info-emphasis border border-info-subtle rounded-pill">Vegetarian</span> }
+                            </div>
+                        </td>
+                        <td>
+                            @if (recipe.ReviewCount > 0)
+                            {
+                                <div class="d-flex align-items-center gap-1">
+                                    <partial name="_Stars" model="recipe.AverageRating" />
+                                    <span class="fw-bold small ms-1 text-dark">@recipe.AverageRating.ToString("0.0")</span>
+                                    <span class="text-muted small">(@recipe.ReviewCount)</span>
+                                </div>
+                            }
+                            @if (recipe.ReviewCount == 0)
+                            {
+                                <span class="text-muted small">No reviews yet</span>
+                            }
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark border font-monospace px-2 py-1">
+                                <i class="fa-regular fa-clock me-1 text-danger"></i>@recipe.TimeToCook
+                            </span>
+                        </td>
+                        <td class="text-end pe-4">
+                            <a asp-page="Recipes/View" asp-route-id="@recipe.Id" class="btn btn-sm btn-outline-primary fw-semibold px-3 rounded-pill">
+                                View <i class="fa-solid fa-arrow-right ms-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+                @if (recipes.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-5">
+                            <i class="fa-solid fa-utensils fa-2x mb-3 text-secondary opacity-50 d-block"></i>
+                            No recipes found. Try adjusting your search query.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-<a asp-page="Recipes/Create" class="btn btn-success">Create new Recipe</a>

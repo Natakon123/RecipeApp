@@ -2,17 +2,28 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav gap-1">
+<ul class="navbar-nav align-items-center gap-2">
 @if (SignInManager.IsSignedIn(User))
 {
+    @* ปุ่ม Create Recipe โทนส้ม-แดง *@
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-            <i class="fa-solid fa-user me-1"></i> Hello @User.Identity?.Name!
+        <a class="btn btn-sm text-white fw-semibold px-3 py-1-5 rounded-pill shadow-sm" asp-page="/Recipes/Create" style="background-color: #ff5a5f; border: none;">
+            <i class="fa-solid fa-plus me-1"></i> Create Recipe
         </a>
     </li>
+
+    @* ปุ่มโปรไฟล์ผู้ใช้ *@
+    <li class="nav-item">
+        <a class="nav-link text-dark fw-medium px-2" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+            <i class="fa-regular fa-circle-user text-danger me-1 fs-5 align-middle"></i>
+            <span class="align-middle">@User.Identity?.Name</span>
+        </a>
+    </li>
+
+    @* ปุ่ม Logout แบบ Pill Button *@
     <li class="nav-item">
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-            <button type="submit" class="nav-link btn btn-link text-dark border-0">
+            <button type="submit" class="btn btn-sm btn-outline-secondary fw-medium rounded-pill px-3">
                 <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
             </button>
         </form>
@@ -21,12 +32,12 @@
 else
 {
     <li class="nav-item">
-        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
-            <i class="fa-solid fa-user-plus me-1"></i> Register
+        <a class="nav-link text-dark fw-medium px-2" asp-area="Identity" asp-page="/Account/Register">
+            <i class="fa-solid fa-user-plus me-1 text-secondary"></i> Register
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">
+        <a class="btn btn-sm text-white fw-semibold px-3 rounded-pill shadow-sm" asp-area="Identity" asp-page="/Account/Login" style="background-color: #ff5a5f; border: none;">
             <i class="fa-solid fa-right-to-bracket me-1"></i> Login
         </a>
     </li>
